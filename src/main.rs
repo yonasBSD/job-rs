@@ -7,7 +7,8 @@ fn main() {
     let _ = std::env::args().nth(2).expect("no command given");
 
     sched.add(Job::new(period.parse().unwrap(), || {
-        let command = std::env::args().nth(2).expect("no command given");
+        let args: Vec<String> = std::env::args().collect();
+        let command = &args[2..].join(" ");
         let output = Command::new("sh").arg("-c").arg(command).output().expect("Command failed");
 
         if !output.status.success() {
