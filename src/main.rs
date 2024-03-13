@@ -1,4 +1,4 @@
-use rcron::{JobScheduler, Job};
+use rcron::{JobScheduler, Job };
 use std::{process::{Command,exit}, time::Duration};
 
 fn main() {
@@ -14,12 +14,12 @@ fn main() {
         if !output.status.success() {
             eprintln!("Command executed with failing error code");
             println!("{}", String::from_utf8_lossy(&output.stdout));
-            println!("{}", String::from_utf8_lossy(&output.stderr));
+            eprintln!("{}", String::from_utf8_lossy(&output.stderr));
             exit(1);
         }
 
         println!("{}", String::from_utf8_lossy(&output.stdout));
-        println!("{}", String::from_utf8_lossy(&output.stderr));
+        eprintln!("{}", String::from_utf8_lossy(&output.stderr));
     }));
 
     loop {
